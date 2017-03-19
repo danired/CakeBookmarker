@@ -41,8 +41,15 @@ class User extends Entity
         'password'
     ];
 
-    protected function _setPassword($value) {
+    /**
+     *
+     * @param string $value Password unencrypted
+     * @return bool|string
+     */
+    protected function _setPassword($value)
+    {
         $hasher = new DefaultPasswordHasher();
+
         return $hasher->hash($value);
     }
 }

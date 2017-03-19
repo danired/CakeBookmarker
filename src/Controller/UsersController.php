@@ -14,7 +14,7 @@ class UsersController extends AppController
     /**
      * Index method
      *
-     * @return \Cake\Network\Response|null
+     * @return \Cake\Network\Response|null|void
      */
     public function index()
     {
@@ -28,7 +28,7 @@ class UsersController extends AppController
      * View method
      *
      * @param string|null $id User id.
-     * @return \Cake\Network\Response|null
+     * @return \Cake\Network\Response|null|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
@@ -106,10 +106,10 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-    
+
     /**
      * Login method
-     * 
+     *
      * @return \Cake\Http\Response|NULL
      */
     public function login()
@@ -118,26 +118,33 @@ class UsersController extends AppController
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
+
                 return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error('Your username or password is incorrect.');
         }
     }
-    
+
+    /**
+     *
+     * {@inheritDoc}
+     * @see \App\Controller\AppController::initialize()
+     */
     public function initialize()
     {
         parent::initialize();
         $this->Auth->allow(['logout']);
     }
-    
+
     /**
      * Logout method
-     * 
+     *
      * @return \Cake\Http\Response|NULL
      */
     public function logout()
     {
         $this->Flash->success('You are now logged out.');
+
         return $this->redirect($this->Auth->logout());
     }
 }

@@ -90,9 +90,12 @@ class BookmarksTable extends Table
         return $rules;
     }
 
-    // The $query argument is a query builder instance.
-    // The $options array will contain the 'tags' option we passed
-    // to find('tagged') in our controller action.
+    /**
+     *
+     * @param \Cake\ORM\Query $query The $query argument is a query builder instance.
+     * @param array $options The $options array will contain the 'tags' option we passed to find('tagged') in our controller action.
+     * @return \Cake\ORM\Query
+     */
     public function findTagged(Query $query, array $options)
     {
         $bookmarks = $this->find()

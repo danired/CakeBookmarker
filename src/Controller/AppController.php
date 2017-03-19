@@ -50,7 +50,7 @@ class AppController extends Controller
          */
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
-        
+
         // Autorizacion
         $this->loadComponent('Auth', [
             'authenticate' => [
@@ -67,7 +67,7 @@ class AppController extends Controller
             ],
             'unauthorizedRedirect' => $this->referer() // If unauthorized, return them to page they were just on
         ]);
-        
+
         // Allow the display action so our pages controller
         // continues to work.
         $this->Auth->allow(['display']);

@@ -14,7 +14,7 @@ class BookmarksController extends AppController
     /**
      * Index method
      *
-     * @return \Cake\Network\Response|null
+     * @return \Cake\Network\Response|null|void
      */
     public function index()
     {
@@ -31,7 +31,7 @@ class BookmarksController extends AppController
      * View method
      *
      * @param string|null $id Bookmark id.
-     * @return \Cake\Network\Response|null
+     * @return \Cake\Network\Response|null|void
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
@@ -116,6 +116,8 @@ class BookmarksController extends AppController
 
     /**
      * Nuevo método tags, para listar los bookmarks que tienen un tag determinado
+     *
+     * @return \Cake\Network\Response|null|void
      */
     public function tags()
     {
