@@ -148,4 +148,15 @@ class UsersController extends AppController
 
         return $this->redirect($this->Auth->logout());
     }
+
+    /**
+     * Comprueba la autorización del usuario según la acción.
+     *
+     * {@inheritDoc}
+     * @see \App\Controller\AppController::isAuthorized()
+     */
+    public function isAuthorized($user)
+    {
+        return true;
+    }
 }
