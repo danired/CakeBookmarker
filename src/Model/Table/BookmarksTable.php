@@ -111,6 +111,8 @@ class BookmarksTable extends Table
             });
         }
 
+        $bookmarks->where(['Bookmarks.user_id = ' => $options['user_id']]);
+
         return $bookmarks->group(['Bookmarks.id']);
     }
 }

@@ -19,7 +19,10 @@ class BookmarksController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Users']
+            'contain' => ['Users'],
+            'conditions' => [
+                'Bookmarks.user_id' => $this->Auth->user('id'),
+            ]
         ];
         $bookmarks = $this->paginate($this->Bookmarks);
 
@@ -54,6 +57,7 @@ class BookmarksController extends AppController
         $bookmark = $this->Bookmarks->newEntity();
         if ($this->request->is('post')) {
             $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->getData());
+            $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success(__('The bookmark has been saved.'));
 
@@ -81,6 +85,7 @@ class BookmarksController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $bookmark = $this->Bookmarks->patchEntity($bookmark, $this->request->getData());
+            $bookmark->user_id = $this->Auth->user('id');
             if ($this->Bookmarks->save($bookmark)) {
                 $this->Flash->success(__('The bookmark has been saved.'));
 
@@ -127,7 +132,8 @@ class BookmarksController extends AppController
 
         // Use the BookmarksTable to find tagged bookmarks.
         $bookmarks = $this->Bookmarks->find('tagged', [
-            'tags' => $tags
+            'tags' => $tags,
+            'user_id' => $this->Auth->user('id')
         ]);
 
         // Pass variables into the view template context.
